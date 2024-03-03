@@ -1,16 +1,28 @@
 "use client";
 import { Banner, CreatorCard, NFTCard } from "@/components";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import images from "../assets";
 import { makeId } from "../../utils/makeId";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { NFTContext } from "../../context/NftContext";
 
 function Home() {
+    const { fetchNfts } = useContext(NFTContext);
     const parentRef = useRef(null);
     const scrollRef = useRef(null);
     const { theme } = useTheme();
     const [hideButtons, setHideButtons] = useState(false);
+    const [nfts, setNFTS] = useState([]);
+
+    useEffect(() => {
+        const fetchAndSetNfs = async () => {
+            const fetchedNfts = await fetchNfts();
+            console.log({ fetchedNfts });
+            setNFTS(fetchedNfts);
+        };
+        fetchAndSetNfs();
+    }, []);
 
     const handleScroll = (direction) => {
         const { current } = scrollRef;
@@ -112,18 +124,8 @@ function Home() {
                         <div>SearchBar</div>
                     </div>
                     <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                            <NFTCard
-                                key={`nft-${i}`}
-                                nft={{
-                                    i,
-                                    name: `Nifty NFT ${i}`,
-                                    price: 10 - i * (0.534).toFixed(2),
-                                    seller: `0x${makeId(3)}...${makeId(4)}`,
-                                    owner: `0x${makeId(3)}...${makeId(4)}`,
-                                    description: "Good NFT For sale",
-                                }}
-                            />
+                        {nfts.map((nft) => (
+                            <NFTCard key={nft.tokenId} nft={nft} />
                         ))}
                     </div>
                 </div>

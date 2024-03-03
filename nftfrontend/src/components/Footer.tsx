@@ -39,7 +39,7 @@ const Footer = () => {
                             alt="logo"
                         />
                         <p className="ml-1 text-lg font-semibold text-nft-black-1 dark:text-white">
-                            EnmaKet
+                            EnmaGalaxy
                         </p>
                     </div>
                     <p className="mt-6 font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
@@ -61,7 +61,7 @@ const Footer = () => {
                 </div>
                 <div className="flexBetweenStart ml-10 flex-1 flex-wrap md:ml-0 md:mt-8">
                     <FooterLinks
-                        heading="EnmaKet"
+                        heading="EnmaGalaxy"
                         items={["Explore", "How it Works", "Contact Us"]}
                     />
                     <FooterLinks
@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="flexCenter mt-5 w-full border-t border-nft-gray-1 px-16 dark:bg-nft-black-1 sm:px-4">
                 <div className="flexBetween mt-7 w-full flex-row sm:flex-col minmd:w-4/5">
                     <p className="font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
-                        EnmaKet, Inc. All Rights Reserved
+                        EnmaGalaxy, Inc. All Rights Reserved
                     </p>
                     <div className="flex flex-row sm:mt-4">
                         {[images.instagram, images.twitter, images.discord].map(

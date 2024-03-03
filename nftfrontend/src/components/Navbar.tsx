@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import images from "../assets";
 import { Button } from "./";
+import { NFTContext } from "../../context/NftContext";
 
 const MenuItems = ({ isMobile, active, setActive }) => {
     const generateLink = (i) => {
@@ -41,8 +42,9 @@ const MenuItems = ({ isMobile, active, setActive }) => {
 };
 
 const ButtonGroup = ({ setActive, router }) => {
+    const { connectWallet, currentAccount } = useContext(NFTContext);
     const hasConnected = true;
-    return hasConnected ? (
+    return currentAccount ? (
         <Button
             btnName="Create"
             classStyles="mx-2 rounded-xl"
@@ -55,7 +57,9 @@ const ButtonGroup = ({ setActive, router }) => {
         <Button
             btnName="Connect"
             classStyles="mx-2 rounded-xl"
-            handleClick={() => {}}
+            handleClick={() => {
+                connectWallet();
+            }}
         />
     );
 };
@@ -82,7 +86,7 @@ const Navbar = () => {
                             alt="logo"
                         />
                         <p className="ml-1 text-lg font-semibold text-nft-black-1 dark:text-white">
-                            EnmaKet
+                            EnmaGalaxy
                         </p>
                     </div>
                 </Link>

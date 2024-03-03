@@ -1,12 +1,13 @@
 "use client";
 import { useState, useMemo, useCallback, useContext } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
 import { Button, Input } from "@/components";
 import images from "../../assets";
+import { NFTContext } from "../../../context/NftContext";
 
 function page() {
     const [fileUrl, setFileUrl] = useState(null);
@@ -16,9 +17,13 @@ function page() {
         description: "",
     });
     const { theme } = useTheme();
+    const { uploadToIPFS, createNFT } = useContext(NFTContext);
+    const router = useRouter();
 
-    const onDrop = useCallback(() => {
-        // upload image to IPFS
+    const onDrop = useCallback(async (acceptedFile) => {
+        const url = await uploadToIPFS(acceptedFile[0]);
+        setFileUrl(url);
+        console.log(`Being fetched on created page: ${url}`);
     }, []);
     const {
         getRootProps,
@@ -80,8 +85,13 @@ function page() {
                         </div>
                         {fileUrl && (
                             <aside>
-                                <div>
-                                    <img src={fileUrl} alt="asset_file" />
+                                <div className="relative size-52 overflow-hidden rounded-2xl sm:h-36 xs:h-56 minmd:h-60 minlg:h-300">
+                                    <Image
+                                        src={`https://${process.env.PINATADOMAIN}/ipfs/${fileUrl}`}
+                                        layout="fill"
+                                        objectFit="cover"
+                                        alt="asset_file"
+                                    />
                                 </div>
                             </aside>
                         )}
@@ -118,7 +128,9 @@ function page() {
                     <Button
                         btnName="Create NFT"
                         classStyles="rounded-xl"
-                        handleClick={() => {}}
+                        handleClick={() =>
+                            createNFT(formInput, fileUrl, router)
+                        }
                     />
                 </div>
             </div>
