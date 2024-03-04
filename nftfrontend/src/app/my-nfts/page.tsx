@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import images from "../../assets";
 import { NFTContext } from "../../../context/NftContext";
-import { Banner, Loader, NFTCard } from "@/components";
+import { Banner, Loader, NFTCard, SearchBar } from "@/components";
 import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
 import { generateAvatarURL, generateAvatarHTML } from "@cfx-kit/wallet-avatar";
@@ -11,7 +11,9 @@ import { generateAvatarURL, generateAvatarHTML } from "@cfx-kit/wallet-avatar";
 function page() {
     const { fetchMyNftsOrListedNfts, currentAccount } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
+    const [nftsCopy, setNftsCopy] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [activeSelect, setActiveSelect] = useState("Recently Added");
 
     useEffect(() => {
         const fetchAndSetNfs = async () => {
@@ -20,6 +22,7 @@ function page() {
             );
             console.log({ fetchedNfts });
             setNfts(fetchedNfts);
+            setNftsCopy(fetchedNfts);
             setIsLoading(false);
         };
         fetchAndSetNfs();
@@ -32,6 +35,40 @@ function page() {
             </div>
         );
     }
+
+    useEffect(() => {
+        const sortedNfts = [...nfts];
+        switch (activeSelect) {
+            case "Price (low to high)":
+                setNfts(sortedNfts.sort((a, b) => a.price - b.price));
+                break;
+            case "Price (high to low)":
+                setNfts(sortedNfts.sort((a, b) => b.price - a.price));
+                break;
+            case "Recently Added":
+                setNfts(sortedNfts.sort((a, b) => b.tokenId - a.tokenId));
+                break;
+            default:
+                setNfts(nfts);
+                break;
+        }
+    }, [activeSelect]);
+
+    const onHandleSearch = (value) => {
+        const filteredNfts = nfts.filter(({ name }) =>
+            name.toLowerCase().includes(value.toLowerCase())
+        );
+        if (filteredNfts.length) {
+            setNfts(filteredNfts);
+        } else {
+            setNfts(nftsCopy);
+        }
+    };
+    const onClearSearch = () => {
+        if (nfts.length && nftsCopy.length) {
+            setNfts(nftsCopy);
+        }
+    };
 
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-start">
@@ -56,7 +93,7 @@ function page() {
                     </p>
                 </div>
             </div>
-            {!isLoading && nfts.length === 0 ? (
+            {!isLoading && nfts.length === 0 && nftsCopy.length === 0 ? (
                 <div className="flexCenter p-16 sm:p-4">
                     <h1 className="font-poppins text-2xl font-extrabold text-nft-black-1 dark:text-white">
                         No NFTs Owned - Purchase NFTs or unlist owned NFTs to
@@ -66,7 +103,12 @@ function page() {
             ) : (
                 <div className="flexCenter w-full flex-col p-12 sm:px-4 minmd:w-4/5">
                     <div className="flex w-full flex-1 flex-row px-4 sm:flex-col xs:px-0 minlg:px-8">
-                        SearchBar
+                        <SearchBar
+                            activeSelect={activeSelect}
+                            setActiveSelect={setActiveSelect}
+                            handleSearch={onHandleSearch}
+                            clearSearch={onClearSearch}
+                        />
                     </div>
                     <div className="mt-3 flex w-full flex-wrap">
                         {nfts.map((nft) => (

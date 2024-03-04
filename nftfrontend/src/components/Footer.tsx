@@ -95,7 +95,7 @@ const Footer = () => {
                                         height={24}
                                         alt="social"
                                         className={
-                                            theme === "light" && "invert"
+                                            theme === "light" ? "invert" : ""
                                         }
                                     />
                                 </div>

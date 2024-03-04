@@ -12,6 +12,7 @@ export const NFTContext = createContext({});
 
 export const NFTProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
+    const [isLoadingNft, setIsLoadingNft] = useState(false);
     const nftCurrency = "ETH";
     const checkIfWallerIsConnected = async () => {
         if (!window.ethereum) {
@@ -94,20 +95,25 @@ export const NFTProvider = ({ children }) => {
         }
     };
 
-    const createSale = async (url, formInputPrice) => {
+    const createSale = async (url, formInputPrice, isReselling, id) => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const price = ethers.parseUnits(formInputPrice, "ether");
         const contract = fetchContract(signer);
         const listingPrice = await contract.getListingPrice();
-
-        const transaction = await contract.createNft(price, url, {
-            value: listingPrice.toString(),
-        });
+        const transaction = !isReselling
+            ? await contract.createNft(price, url, {
+                  value: listingPrice.toString(),
+              })
+            : await contract.relistNft(id, price, {
+                  value: listingPrice.toString(),
+              });
+        setIsLoadingNft(true);
         await transaction.wait();
     };
 
     const fetchNfts = async () => {
+        setIsLoadingNft(false);
         const provider = new ethers.JsonRpcProvider(
             "https://sepolia.drpc.org",
             "sepolia"
@@ -140,9 +146,9 @@ export const NFTProvider = ({ children }) => {
     };
 
     const fetchMyNftsOrListedNfts = async (type) => {
+        setIsLoadingNft(false);
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        // const price = ethers.parseUnits(formInputPrice, "ether");
         const contract = fetchContract(signer);
 
         const data =
@@ -175,6 +181,19 @@ export const NFTProvider = ({ children }) => {
         return items;
     };
 
+    const buyNft = async (nft) => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const price = ethers.parseUnits(nft.price.toString(), "ether");
+        const contract = fetchContract(signer);
+        const tx = await contract.exchangeNft(nft.tokenId, {
+            value: price,
+        });
+        setIsLoadingNft(true);
+        await tx.wait();
+        setIsLoadingNft(false);
+    };
+
     return (
         <NFTContext.Provider
             value={{
@@ -185,6 +204,9 @@ export const NFTProvider = ({ children }) => {
                 createNFT,
                 fetchNfts,
                 fetchMyNftsOrListedNfts,
+                buyNft,
+                createSale,
+                isLoadingNft,
             }}
         >
             {children}

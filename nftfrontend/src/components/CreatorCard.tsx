@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import images from "../assets";
 import { NFTContext } from "../../context/NftContext";
+import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 
 const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
     const { nftCurrency } = useContext(NFTContext);
@@ -15,7 +16,7 @@ const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
             <div className="my-2 flex justify-center">
                 <div className="relative size-20 minlg:size-28">
                     <Image
-                        src={creatorImage}
+                        src={generateAvatarURL(creatorImage)}
                         layout="fill"
                         objectFit="cover"
                         alt="creatorName"
@@ -36,7 +37,7 @@ const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
                     {creatorName}
                 </p>
                 <p className="mt-1 font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
-                    {creatorEths.toFixed(2)}{" "}
+                    {creatorEths.toFixed(4)}{" "}
                     <span className="font-normal">{nftCurrency}</span>
                 </p>
             </div>

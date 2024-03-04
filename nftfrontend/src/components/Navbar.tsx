@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import images from "../assets";
 import { Button } from "./";
 import { NFTContext } from "../../context/NftContext";
 
-const MenuItems = ({ isMobile, active, setActive }) => {
+const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
     const generateLink = (i) => {
         switch (i) {
             case 0:
@@ -31,6 +31,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
                     key={i}
                     onClick={() => {
                         setActive(item);
+                        if (isMobile) setIsOpen(false);
                     }}
                     className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white ${active === item ? "text-nft-black-1 dark:text-white" : "text-nft-gray-2 dark:text-nft-gray-3"}`}
                 >
@@ -41,7 +42,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
     );
 };
 
-const ButtonGroup = ({ setActive, router }) => {
+const ButtonGroup = ({ setActive, router, setIsOpen }) => {
     const { connectWallet, currentAccount } = useContext(NFTContext);
     const hasConnected = true;
     return currentAccount ? (
@@ -50,6 +51,7 @@ const ButtonGroup = ({ setActive, router }) => {
             classStyles="mx-2 rounded-xl"
             handleClick={() => {
                 setActive("");
+                setIsOpen(false);
                 router.push("/create-nft");
             }}
         />
@@ -64,19 +66,50 @@ const ButtonGroup = ({ setActive, router }) => {
     );
 };
 
+const checkActive = (active, setActive, router, pathname) => {
+    console.log(router.pathname);
+
+    switch (pathname) {
+        case "/":
+            if (active !== "Explore NFTs") setActive("Explore NFTs");
+            break;
+        case "/created-nfts":
+            if (active !== "Listed NFTs") setActive("Listed NFTs");
+            break;
+        case "/my-nfts":
+            if (active !== "My NFTs") setActive("My NFTs");
+            break;
+        case "/create-nft":
+            setActive("");
+            break;
+        default:
+            setActive("");
+            break;
+    }
+};
+
 const Navbar = () => {
     const { theme, setTheme } = useTheme();
     const [active, setActive] = useState("Explore NFTs");
     const router = useRouter();
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    useEffect(() => {
+        checkActive(active, setActive, router, pathname);
+    }, [pathname]);
 
+    useEffect(() => {
+        setTheme("dark");
+    }, []);
     return (
         <nav className="flexBetween fixed z-10 w-full flex-row border-b border-nft-gray-1 bg-white p-4 dark:border-nft-black-1 dark:bg-nft-dark">
             <div className="flex flex-1 flex-row justify-start">
                 <Link href="/">
                     <div
                         className="flexCenter cursor-pointer md:hidden"
-                        onClick={() => {}}
+                        onClick={() => {
+                            setActive("Explore NFTs");
+                        }}
                     >
                         <Image
                             src={images.logo02}
@@ -91,7 +124,13 @@ const Navbar = () => {
                     </div>
                 </Link>
                 <Link href="/">
-                    <div className="hidden md:flex" onClick={() => {}}>
+                    <div
+                        className="hidden md:flex"
+                        onClick={() => {
+                            setActive("Explore NFTs");
+                            setIsOpen(false);
+                        }}
+                    >
                         <Image
                             src={images.logo02}
                             objectFit="contain"
@@ -124,7 +163,11 @@ const Navbar = () => {
                 <div className="flex md:hidden">
                     <MenuItems active={active} setActive={setActive} />
                     <div className="ml-4">
-                        <ButtonGroup setActive={setActive} router={router} />
+                        <ButtonGroup
+                            setActive={setActive}
+                            router={router}
+                            setIsOpen={setIsOpen}
+                        />
                     </div>
                 </div>
             </div>
@@ -139,7 +182,7 @@ const Navbar = () => {
                         onClick={() => {
                             setIsOpen(false);
                         }}
-                        className={theme === "light" && "invert"}
+                        className={theme === "light" ? "invert" : ""}
                     />
                 ) : (
                     <Image
@@ -151,7 +194,7 @@ const Navbar = () => {
                         onClick={() => {
                             setIsOpen(true);
                         }}
-                        className={theme === "light" && "invert"}
+                        className={theme === "light" ? "invert" : ""}
                     />
                 )}
                 {isOpen && (
@@ -160,6 +203,7 @@ const Navbar = () => {
                             <MenuItems
                                 active={active}
                                 setActive={setActive}
+                                setIsOpen={setIsOpen}
                                 isMobile
                             />
                         </div>
@@ -167,6 +211,7 @@ const Navbar = () => {
                             <ButtonGroup
                                 setActive={setActive}
                                 router={router}
+                                setIsOpen={setIsOpen}
                             />
                         </div>
                     </div>
