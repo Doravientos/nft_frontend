@@ -10,7 +10,7 @@ const fetchContract = (signerOrProvider: any) =>
 
 export const NFTContext = createContext({});
 
-export const NFTProvider = ({ children }) => {
+export const NFTProvider = ({ children }: { children: any }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [isLoadingNft, setIsLoadingNft] = useState(false);
     const nftCurrency = "ETH";
