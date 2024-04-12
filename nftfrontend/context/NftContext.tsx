@@ -106,12 +106,10 @@ export const NFTProvider = ({ children }: { children: any }) => {
         const signer = await provider.getSigner();
         const price = ethers.parseUnits(formInputPrice, "ether");
         const contract = fetchContract(signer);
+        // @ts-ignore
         const listingPrice = await contract.getListingPrice();
-        const transaction = !isReselling
-            ? await contract.createNft(price, url, {
-                  value: listingPrice.toString(),
-              })
-            : await contract.relistNft(id, price, {
+        // @ts-ignore
+        const transaction = !isReselling ? await contract.createNft(price, url, {value: listingPrice.toString(),}) : await contract.relistNft(id, price, {
                   value: listingPrice.toString(),
               });
         setIsLoadingNft(true);
@@ -125,10 +123,13 @@ export const NFTProvider = ({ children }: { children: any }) => {
             "sepolia"
         );
         const contract = fetchContract(provider);
+        // @ts-ignore
         const data = await contract.listedItemsForSale();
         const items = await Promise.all(
             data.map(
+                // @ts-ignore
                 async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+                    // @ts-ignore
                     const tokenURI = await contract.tokenURI(tokenId);
                     const {
                         data: { image, name, description },
@@ -159,12 +160,16 @@ export const NFTProvider = ({ children }: { children: any }) => {
 
         const data =
             type === "fetchItemsListed"
-                ? await contract.myListedNfts()
-                : await contract.myNftsPurchased();
+                ? // @ts-ignore
+                  await contract.myListedNfts()
+                : // @ts-ignore
+                  await contract.myNftsPurchased();
 
         const items = await Promise.all(
             data.map(
+                // @ts-ignore
                 async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+                    // @ts-ignore
                     const tokenURI = await contract.tokenURI(tokenId);
                     const {
                         data: { image, name, description },
@@ -192,6 +197,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
         const signer = await provider.getSigner();
         const price = ethers.parseUnits(nft.price.toString(), "ether");
         const contract = fetchContract(signer);
+        // @ts-ignore
         const tx = await contract.exchangeNft(nft.tokenId, {
             value: price,
         });
