@@ -15,14 +15,6 @@ function Page() {
     const [isLoading, setIsLoading] = useState(false);
     const [activeSelect, setActiveSelect] = useState("Recently Added");
 
-    if (isLoading) {
-        return (
-            <div className="flexStart min-h-screen">
-                <Loader />
-            </div>
-        );
-    }
-
     useEffect(() => {
         const fetchAndSetNfs = async () => {
             const fetchedNfts = await fetchMyNftsOrListedNfts(
@@ -69,7 +61,13 @@ function Page() {
             setNfts(nftsCopy);
         }
     };
-
+    if (isLoading) {
+        return (
+            <div className="flexStart min-h-screen">
+                <Loader />
+            </div>
+        );
+    }
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-start">
             <div className="flexCenter w-full flex-col">
