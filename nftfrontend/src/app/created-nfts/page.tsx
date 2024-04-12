@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import { NFTContext } from "../../../context/NftContext";
 
 function Page() {
+    // @ts-ignore
     const { fetchMyNftsOrListedNfts } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +46,7 @@ function Page() {
                     </h2>
                     <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
                         {nfts.map((nft) => (
+                            // @ts-ignore
                             <NFTCard key={nft.tokenId} nft={nft} />
                         ))}
                     </div>
