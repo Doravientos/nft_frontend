@@ -8,7 +8,7 @@ import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
 import { generateAvatarURL, generateAvatarHTML } from "@cfx-kit/wallet-avatar";
 
-function page() {
+function Page() {
     const { fetchMyNftsOrListedNfts, currentAccount } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
     const [nftsCopy, setNftsCopy] = useState([]);
@@ -121,4 +121,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

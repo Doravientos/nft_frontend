@@ -4,7 +4,7 @@ import { Loader, NFTCard } from "@/components";
 import { useState, useEffect, useContext } from "react";
 import { NFTContext } from "../../../context/NftContext";
 
-function page() {
+function Page() {
     const { fetchMyNftsOrListedNfts } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -54,4 +54,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

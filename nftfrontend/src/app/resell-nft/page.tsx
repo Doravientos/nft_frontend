@@ -6,7 +6,7 @@ import axios from "axios";
 import { Button, Input, Loader } from "@/components";
 import Image from "next/image";
 
-function page() {
+function Page() {
     const { createSale, isLoadingNft } = useContext(NFTContext);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -75,4 +75,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

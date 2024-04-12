@@ -59,7 +59,7 @@ const PaymentBodyCmp = ({ nft, nftCurrency }) => {
     );
 };
 
-function page() {
+function Page() {
     const { currentAccount, nftCurrency, buyNft, isLoadingNft } =
         useContext(NFTContext);
     const [isLoading, setIsLoading] = useState(true);
@@ -281,4 +281,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;
