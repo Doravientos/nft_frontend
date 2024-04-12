@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { MarketAddress, MarketAddressAbi } from "../../../../context/constants";
 import axios from "axios";
 
-export async function GET(req: Request) {
+export async function GET() {
     const provider = new ethers.JsonRpcProvider(
         "https://sepolia.drpc.org",
         "sepolia"
@@ -37,10 +37,12 @@ export async function GET(req: Request) {
         )
     );
 
-    return Response.json(
-        { listedNfts },
-        {
-            status: 200,
-        }
-    );
+    return new Response(JSON.stringify(listedNfts), {
+        status: 200,
+        headers: {
+            "Cache-Control": "public, s-maxage=1",
+            "CDN-Cache-Control": "public, s-maxage=60",
+            "Vercel-CDN-Cache-Control": "public, s-maxage=60",
+        },
+    });
 }
