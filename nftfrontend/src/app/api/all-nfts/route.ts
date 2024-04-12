@@ -1,9 +1,8 @@
 import { ethers } from "ethers";
 import { MarketAddress, MarketAddressAbi } from "../../../../context/constants";
 import axios from "axios";
-import { NextRequest, NextResponse } from "next/server.js";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
     const provider = new ethers.JsonRpcProvider(
         "https://sepolia.drpc.org",
         "sepolia"
@@ -38,7 +37,7 @@ export async function GET(req: NextRequest) {
         )
     );
 
-    return NextResponse.json(
+    return Response.json(
         { listedNfts },
         {
             status: 200,
