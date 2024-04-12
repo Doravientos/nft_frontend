@@ -5,7 +5,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { MarketAddress, MarketAddressAbi } from "./constants";
 import axios from "axios";
 
-const fetchContract = (signerOrProvider) =>
+const fetchContract = (signerOrProvider: any) =>
     new ethers.Contract(MarketAddress, MarketAddressAbi, signerOrProvider);
 
 export const NFTContext = createContext({});
