@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 // import Web3Modal from "web3modal";
 import { MarketAddress, MarketAddressAbi } from "./constants";
 import axios from "axios";
+declare var window: any;
 
 const fetchContract = (signerOrProvider: any) =>
     new ethers.Contract(MarketAddress, MarketAddressAbi, signerOrProvider);
