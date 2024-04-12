@@ -44,7 +44,7 @@ const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
 
 const ButtonGroup = ({ setActive, router, setIsOpen }) => {
     const { connectWallet, currentAccount } = useContext(NFTContext);
-    const hasConnected = true;
+    // const hasConnected = true;
     return currentAccount ? (
         <Button
             btnName="Create"

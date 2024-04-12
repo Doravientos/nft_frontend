@@ -6,7 +6,7 @@ import { NFTContext } from "../../../context/NftContext";
 import { Button, Loader, Modal } from "@/components";
 import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 
 const PaymentBodyCmp = ({ nft, nftCurrency }) => {

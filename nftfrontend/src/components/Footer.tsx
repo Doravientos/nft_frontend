@@ -24,7 +24,7 @@ const FooterLinks = ({ heading, items }) => (
 );
 
 const Footer = () => {
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
 
     return (
         <footer className="flexCenter flex-col border-t py-16 dark:border-nft-black-1 sm:py-8">
