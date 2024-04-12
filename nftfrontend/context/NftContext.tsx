@@ -43,7 +43,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
         window.location.reload();
     };
 
-    const uploadToIPFS = async (file, setFileUrl) => {
+    const uploadToIPFS = async (file: any, setFileUrl: any) => {
         try {
             const form = new FormData();
             form.append("file", file);
