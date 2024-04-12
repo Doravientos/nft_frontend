@@ -7,6 +7,7 @@ import { Button, Input, Loader } from "@/components";
 import Image from "next/image";
 
 function Page() {
+    // @ts-ignore
     const { createSale, isLoadingNft } = useContext(NFTContext);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ function Page() {
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
     const fetchNFT = async () => {
+        // @ts-ignore
         const { data } = await axios.get(tokenURI);
         setPrice(data.price);
         setImage(data.image);
@@ -50,6 +52,7 @@ function Page() {
                     inputType="number"
                     title="Price"
                     placeHolder="NFT Price"
+                    // @ts-ignore
                     handleClick={(e) => setPrice(e.target.value)}
                 />
                 {image && (

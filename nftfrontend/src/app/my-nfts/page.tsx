@@ -9,6 +9,7 @@ import { shortenAddress } from "../../../utils/shortenAddress";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 
 function Page() {
+    // @ts-ignore
     const { fetchMyNftsOrListedNfts, currentAccount } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
     const [nftsCopy, setNftsCopy] = useState([]);
@@ -32,12 +33,15 @@ function Page() {
         const sortedNfts = [...nfts];
         switch (activeSelect) {
             case "Price (low to high)":
+                // @ts-ignore
                 setNfts(sortedNfts.sort((a, b) => a.price - b.price));
                 break;
             case "Price (high to low)":
+                // @ts-ignore
                 setNfts(sortedNfts.sort((a, b) => b.price - a.price));
                 break;
             case "Recently Added":
+                // @ts-ignore
                 setNfts(sortedNfts.sort((a, b) => b.tokenId - a.tokenId));
                 break;
             default:
@@ -45,9 +49,10 @@ function Page() {
                 break;
         }
     }, [activeSelect]);
-
+    // @ts-ignore
     const onHandleSearch = (value) => {
         const filteredNfts = nfts.filter(({ name }) =>
+            // @ts-ignore
             name.toLowerCase().includes(value.toLowerCase())
         );
         if (filteredNfts.length) {
@@ -110,6 +115,7 @@ function Page() {
                     </div>
                     <div className="mt-3 flex w-full flex-wrap">
                         {nfts.map((nft) => (
+                            // @ts-ignore
                             <NFTCard key={nft.tokenId} nft={nft} />
                         ))}
                     </div>

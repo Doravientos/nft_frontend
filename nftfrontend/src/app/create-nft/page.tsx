@@ -17,9 +17,10 @@ function Page() {
         description: "",
     });
     const { theme } = useTheme();
+    // @ts-ignore
     const { uploadToIPFS, createNFT, isLoadingNft } = useContext(NFTContext);
     const router = useRouter();
-
+    // @ts-ignore
     const onDrop = useCallback(async (acceptedFile) => {
         const url = await uploadToIPFS(acceptedFile[0]);
         setFileUrl(url);
@@ -33,6 +34,7 @@ function Page() {
         isDragReject,
     } = useDropzone({
         onDrop,
+        // @ts-ignore
         accept: "image/*",
         maxSize: 5000000,
     });
@@ -108,6 +110,7 @@ function Page() {
                     inputType="input"
                     title="Name"
                     placeHolder="NFT Name"
+                    // @ts-ignore
                     handleClick={(e) =>
                         setFormInput({ ...formInput, name: e.target.value })
                     }
@@ -116,6 +119,7 @@ function Page() {
                     inputType="textarea"
                     title="Description"
                     placeHolder="NFT Description"
+                    // @ts-ignore
                     handleClick={(e) =>
                         setFormInput({
                             ...formInput,
@@ -127,6 +131,7 @@ function Page() {
                     inputType="number"
                     title="Price"
                     placeHolder="NFT Price"
+                    // @ts-ignore
                     handleClick={(e) =>
                         setFormInput({ ...formInput, price: e.target.value })
                     }

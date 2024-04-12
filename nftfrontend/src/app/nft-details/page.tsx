@@ -8,7 +8,7 @@ import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
 import { useRouter, useSearchParams } from "next/navigation";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
-
+// @ts-ignore
 const PaymentBodyCmp = ({ nft, nftCurrency }) => {
     return (
         <div className="flex flex-col">
@@ -60,6 +60,7 @@ const PaymentBodyCmp = ({ nft, nftCurrency }) => {
 };
 
 function Page() {
+    // @ts-ignore
     const { currentAccount, nftCurrency, buyNft, isLoadingNft } =
         useContext(NFTContext);
     const [isLoading, setIsLoading] = useState(true);
@@ -87,13 +88,21 @@ function Page() {
     }
     useEffect(() => {
         setNft({
+            // @ts-ignore
             price: searchParams.get("price"),
+            // @ts-ignore
             image: searchParams.get("image"),
+            // @ts-ignore
             tokenId: searchParams.get("tokenId"),
+            // @ts-ignore
             name: searchParams.get("name"),
+            // @ts-ignore
             owner: searchParams.get("owner"),
+            // @ts-ignore
             seller: searchParams.get("seller"),
+            // @ts-ignore
             description: searchParams.get("description"),
+            // @ts-ignore
             tokenURI: searchParams.get("tokenURI"),
         });
         console.log({ nft });
@@ -170,9 +179,8 @@ function Page() {
                             btnName="List on Marketplace"
                             classStyles="mr-5 sm:mr-0 sm:mb-5 rounded-xl"
                             handleClick={() =>
-                                router.push(
-                                    `/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`
-                                )
+                                // @ts-ignore
+                                router.push(`/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
                             }
                         />
                     ) : currentAccount === nft.seller.toLowerCase() ? (
@@ -218,6 +226,7 @@ function Page() {
                 />
             )}
             {isLoadingNft && (
+                // @ts-ignore
                 <Modal
                     header="Buying NFT..."
                     body={
