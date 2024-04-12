@@ -64,7 +64,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
         }
     };
 
-    const createNFT = async (formInput, fileUrl, router) => {
+    const createNFT = async (formInput: any, fileUrl: any, router: any) => {
         // fileUrl is IPFS hash
         const { name, description, price } = formInput;
         if (!name || !description || !price || !fileUrl) {
@@ -91,12 +91,17 @@ export const NFTProvider = ({ children }: { children: any }) => {
             console.log({ url });
             await createSale(url, price);
             router.push("/");
-        } catch (error) {
+        } catch (error: any) {
             console.log(`Error uploading file to IPFS ${error}`);
         }
     };
 
-    const createSale = async (url, formInputPrice, isReselling, id) => {
+    const createSale = async (
+        url: any,
+        formInputPrice: any,
+        isReselling: any,
+        id: any
+    ) => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const price = ethers.parseUnits(formInputPrice, "ether");
@@ -146,7 +151,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
         return items;
     };
 
-    const fetchMyNftsOrListedNfts = async (type) => {
+    const fetchMyNftsOrListedNfts = async (type: any) => {
         setIsLoadingNft(false);
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -182,7 +187,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
         return items;
     };
 
-    const buyNft = async (nft) => {
+    const buyNft = async (nft: any) => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const price = ethers.parseUnits(nft.price.toString(), "ether");
