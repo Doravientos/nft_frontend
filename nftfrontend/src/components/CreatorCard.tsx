@@ -5,6 +5,9 @@ import { NFTContext } from "../../context/NftContext";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 // @ts-ignore
 const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
+    if (!creatorEths || typeof creatorEths != "number") {
+        creatorEths = -1;
+    }
     // @ts-ignore
     const { nftCurrency } = useContext(NFTContext);
     return (
