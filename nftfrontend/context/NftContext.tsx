@@ -59,7 +59,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
             );
             const jsonRes = await res.json();
             return jsonRes.IpfsHash;
-        } catch (error) {
+        } catch (error: any) {
             console.log("Eror uploading file to IPFS " + error.message);
         }
     };
