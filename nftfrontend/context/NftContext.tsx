@@ -89,7 +89,7 @@ export const NFTProvider = ({ children }: { children: any }) => {
             );
             const url = `https://${process.env.PINATADOMAIN}/ipfs/${res.data.IpfsHash}`;
             console.log({ url });
-            await createSale(url, price);
+            await createSale(url, price, false, -1);
             router.push("/");
         } catch (error: any) {
             console.log(`Error uploading file to IPFS ${error}`);
