@@ -1,3 +1,4 @@
+// @ts-ignore
 export const makeId = (length) => {
     let res = "";
     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
