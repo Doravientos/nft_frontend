@@ -43,7 +43,7 @@ function Page() {
         );
     }
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense>
             <div className="flex justify-center p-12 sm:px-4">
                 <div className="w-3/5 md:w-full">
                     <h1 className="font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white">

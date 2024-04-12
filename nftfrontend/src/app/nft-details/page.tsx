@@ -119,7 +119,7 @@ function Page() {
         return <Loader />;
     }
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense>
             <div
                 className="relative flex min-h-screen flex-col justify-center"
                 onLoad={() => scrollToTop()}
