@@ -89,21 +89,21 @@ function Page() {
     useEffect(() => {
         setNft({
             // @ts-ignore
-            price: searchParams.get("price"),
+            price: searchParams.get("price") || "",
             // @ts-ignore
-            image: searchParams.get("image"),
+            image: searchParams.get("image") || "",
             // @ts-ignore
-            tokenId: searchParams.get("tokenId"),
+            tokenId: searchParams.get("tokenId") || "",
             // @ts-ignore
-            name: searchParams.get("name"),
+            name: searchParams.get("name") || "",
             // @ts-ignore
-            owner: searchParams.get("owner"),
+            owner: searchParams.get("owner") || "",
             // @ts-ignore
-            seller: searchParams.get("seller"),
+            seller: searchParams.get("seller") || "",
             // @ts-ignore
-            description: searchParams.get("description"),
+            description: searchParams.get("description") || "",
             // @ts-ignore
-            tokenURI: searchParams.get("tokenURI"),
+            tokenURI: searchParams.get("tokenURI") || "",
         });
         console.log({ nft });
         setIsLoading(false);
@@ -180,7 +180,9 @@ function Page() {
                             classStyles="mr-5 sm:mr-0 sm:mb-5 rounded-xl"
                             handleClick={() =>
                                 // @ts-ignore
-                                router.push(`/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
+                                router.push(
+                                    `/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`
+                                )
                             }
                         />
                     ) : currentAccount === nft.seller.toLowerCase() ? (
