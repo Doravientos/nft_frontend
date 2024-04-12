@@ -68,6 +68,7 @@ function Home() {
             setNFTSCopy(fetchedNfts);
             setIsLoading(false);
             const topCreatorsFetched = getTopCreators(fetchedNfts);
+            console.log({ topCreatorsFetched });
             // @ts-ignore
             setTopCreators(topCreatorsFetched);
         };
