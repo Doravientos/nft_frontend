@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Button } from "./";
-import console from "console";
+// import console from "console";
 
 import images from "../assets";
 

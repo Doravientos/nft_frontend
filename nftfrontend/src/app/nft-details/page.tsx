@@ -1,9 +1,9 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import images from "../../assets";
+// import images from "../../assets";
 import { NFTContext } from "../../../context/NftContext";
-import { Button, Loader, Modal, NFTCard } from "@/components";
+import { Button, Loader, Modal } from "@/components";
 import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -64,7 +64,7 @@ function Page() {
         useContext(NFTContext);
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
-    const pathname = usePathname();
+    // const pathname = usePathname();
     const searchParams = useSearchParams();
     const [paymentModal, setPaymentModal] = useState(false);
     const [successModal, setSuccessModal] = useState(false);

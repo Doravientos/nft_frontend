@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
-import { NFTContext } from "../../context/NftContext";
+// import { NFTContext } from "../../context/NftContext";
 import images from "../assets";
 import Image from "next/image";
 

@@ -1,12 +1,12 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import images from "../../assets";
+// import images from "../../assets";
 import { NFTContext } from "../../../context/NftContext";
 import { Banner, Loader, NFTCard, SearchBar } from "@/components";
 import Image from "next/image";
 import { shortenAddress } from "../../../utils/shortenAddress";
-import { generateAvatarURL, generateAvatarHTML } from "@cfx-kit/wallet-avatar";
+import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 
 function Page() {
     const { fetchMyNftsOrListedNfts, currentAccount } = useContext(NFTContext);

@@ -2,7 +2,7 @@
 import { Banner, CreatorCard, Loader, NFTCard, SearchBar } from "@/components";
 import { useState, useEffect, useRef, useContext } from "react";
 import images from "../assets";
-import { makeId } from "../../utils/makeId";
+// import { makeId } from "../../utils/makeId";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { NFTContext } from "../../context/NftContext";
