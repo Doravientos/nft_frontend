@@ -181,6 +181,7 @@ function Page() {
                             handleClick={() =>
                                 // @ts-ignore
                                 router.push(
+                                    // @ts-ignore
                                     `/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`
                                 )
                             }
