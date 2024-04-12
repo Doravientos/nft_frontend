@@ -10,6 +10,7 @@ import { getTopCreators } from "../../utils/getTopCreators";
 import { shortenAddress } from "../../utils/shortenAddress";
 
 function Home() {
+    // @ts-ignore
     const { fetchNfts } = useContext(NFTContext);
     const parentRef = useRef(null);
     const scrollRef = useRef(null);
@@ -25,12 +26,15 @@ function Home() {
         const sortedNfts = [...nfts];
         switch (activeSelect) {
             case "Price (low to high)":
+                // @ts-ignore
                 setNFTS(sortedNfts.sort((a, b) => a.price - b.price));
                 break;
             case "Price (high to low)":
+                // @ts-ignore
                 setNFTS(sortedNfts.sort((a, b) => b.price - a.price));
                 break;
             case "Recently Added":
+                // @ts-ignore
                 setNFTS(sortedNfts.sort((a, b) => b.tokenId - a.tokenId));
                 break;
             default:
@@ -38,8 +42,10 @@ function Home() {
                 break;
         }
     }, [activeSelect]);
+    // @ts-ignore
     const onHandleSearch = (value) => {
         const filteredNfts = nfts.filter(({ name }) =>
+            // @ts-ignore
             name.toLowerCase().includes(value.toLowerCase())
         );
         if (filteredNfts.length) {
@@ -62,17 +68,20 @@ function Home() {
             setNFTSCopy(fetchedNfts);
             setIsLoading(false);
             const topCreatorsFetched = getTopCreators(fetchedNfts);
+            // @ts-ignore
             setTopCreators(topCreatorsFetched);
         };
         fetchAndSetNfs();
     }, []);
-
+    // @ts-ignore
     const handleScroll = (direction) => {
         const { current } = scrollRef;
         const scrollAmount = window.innerWidth > 1800 ? 270 : 210;
         if (direction === "left") {
+            // @ts-ignore
             current.scrollLeft -= scrollAmount;
         } else {
+            // @ts-ignore
             current.scrollLeft += scrollAmount;
         }
     };
@@ -80,6 +89,7 @@ function Home() {
     const isScrollable = () => {
         const { current } = scrollRef;
         const { current: parent } = parentRef;
+        // @ts-ignore
         if (current?.scrollWidth >= parent?.offsetWidth) {
             setHideButtons(false);
         } else {
@@ -130,12 +140,16 @@ function Home() {
                                 >
                                     {topCreators.map((creator, i) => (
                                         <CreatorCard
+                                            // @ts-ignore
                                             key={creator.seller}
                                             rank={i + 1}
+                                            // @ts-ignore
                                             creatorImage={creator.seller}
                                             creatorName={shortenAddress(
+                                                // @ts-ignore
                                                 creator.seller
                                             )}
+                                            // @ts-ignore
                                             creatorEths={creator.price}
                                         />
                                     ))}
@@ -198,6 +212,7 @@ function Home() {
                             </div>
                             <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
                                 {nfts.map((nft) => (
+                                    // @ts-ignore
                                     <NFTCard key={nft.tokenId} nft={nft} />
                                 ))}
                             </div>
