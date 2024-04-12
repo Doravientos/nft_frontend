@@ -1,8 +1,9 @@
 import { ethers } from "ethers";
 import { MarketAddress, MarketAddressAbi } from "../../../../context/constants";
 import axios from "axios";
+import { NextRequest, NextResponse } from "next/server.js";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     const provider = new ethers.JsonRpcProvider(
         "https://sepolia.drpc.org",
         "sepolia"
@@ -13,6 +14,7 @@ export async function GET() {
         provider
     );
     const allNfts = await contract.listedItemsForSale();
+    console.log(allNfts.length);
     const listedNfts = await Promise.all(
         allNfts.map(
             // @ts-ignore
@@ -36,13 +38,10 @@ export async function GET() {
             }
         )
     );
-
-    return new Response(JSON.stringify(listedNfts), {
-        status: 200,
-        headers: {
-            "Cache-Control": "public, s-maxage=1",
-            "CDN-Cache-Control": "public, s-maxage=60",
-            "Vercel-CDN-Cache-Control": "public, s-maxage=60",
-        },
-    });
+    return NextResponse.json(
+        { listedNfts },
+        {
+            status: 200,
+        }
+    );
 }
