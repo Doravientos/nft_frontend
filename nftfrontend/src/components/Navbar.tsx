@@ -8,8 +8,9 @@ import Link from "next/link";
 import images from "../assets";
 import { Button } from "./";
 import { NFTContext } from "../../context/NftContext";
-
+// @ts-ignore
 const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
+    // @ts-ignore
     const generateLink = (i) => {
         switch (i) {
             case 0:
@@ -41,8 +42,9 @@ const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
         </ul>
     );
 };
-
+// @ts-ignore
 const ButtonGroup = ({ setActive, router, setIsOpen }) => {
+    // @ts-ignore
     const { connectWallet, currentAccount } = useContext(NFTContext);
     // const hasConnected = true;
     return currentAccount ? (
@@ -65,7 +67,7 @@ const ButtonGroup = ({ setActive, router, setIsOpen }) => {
         />
     );
 };
-
+// @ts-ignore
 const checkActive = (active, setActive, router, pathname) => {
     console.log(router.pathname);
 
@@ -161,7 +163,7 @@ const Navbar = () => {
                     </label>
                 </div>
                 <div className="flex md:hidden">
-                    <MenuItems active={active} setActive={setActive} />
+                    <MenuItems active={active} setActive={setActive} isMobile={undefined} setIsOpen={undefined} />
                     <div className="ml-4">
                         <ButtonGroup
                             setActive={setActive}

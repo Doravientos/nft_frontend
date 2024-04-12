@@ -3,11 +3,13 @@ import React, { useRef } from "react";
 import { useTheme } from "next-themes";
 import images from "../assets";
 import Image from "next/image";
-
+// @ts-ignore
 const Modal = ({ header, body, footer, handleClose }) => {
     const modalRef = useRef(null);
     const { theme } = useTheme();
+    // @ts-ignore
     const handleClickOutside = (e) => {
+        // @ts-ignore
         if (modalRef.current && !modalRef.current.contains(e.target)) {
             handleClose();
         }

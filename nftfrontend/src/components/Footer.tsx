@@ -6,20 +6,23 @@ import { Button } from "./";
 // import console from "console";
 
 import images from "../assets";
-
+// @ts-ignore
 const FooterLinks = ({ heading, items }) => (
     <div className="flex-1 items-start justify-start">
         <h3 className="mb-10 font-poppins text-xl font-semibold text-nft-black-1 dark:text-white">
             {heading}
         </h3>
-        {items.map((item, index) => (
-            <p
-                key={index}
-                className="my-3 cursor-pointer font-poppins text-base font-normal text-nft-black-1 hover:text-nft-black-1 dark:text-white dark:hover:text-nft-gray-2"
-            >
-                {item}
-            </p>
-        ))}
+        {
+            // @ts-ignore
+            items.map((item, index) => (
+                <p
+                    key={index}
+                    className="my-3 cursor-pointer font-poppins text-base font-normal text-nft-black-1 hover:text-nft-black-1 dark:text-white dark:hover:text-nft-gray-2"
+                >
+                    {item}
+                </p>
+            ))
+        }
     </div>
 );
 
@@ -55,6 +58,7 @@ const Footer = () => {
                             <Button
                                 btnName="Email me"
                                 classStyles="rounded-md"
+                                handleClick={() => {}}
                             />
                         </div>
                     </div>

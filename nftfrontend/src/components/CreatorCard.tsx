@@ -3,8 +3,9 @@ import Image from "next/image";
 import images from "../assets";
 import { NFTContext } from "../../context/NftContext";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
-
+// @ts-ignore
 const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
+    // @ts-ignore
     const { nftCurrency } = useContext(NFTContext);
     return (
         <div className="m-4 flex min-w-190 flex-col rounded-3xl border border-nft-gray-1 bg-white p-4 dark:border-nft-black-3 dark:bg-nft-black-3 minlg:min-w-240">

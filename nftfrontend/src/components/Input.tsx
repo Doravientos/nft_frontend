@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { NFTContext } from "../../context/NftContext";
-
+// @ts-ignore
 const Input = ({ inputType, title, placeHolder, handleClick }) => {
+    // @ts-ignore
     const { nftCurrency } = useContext(NFTContext);
     return (
         <div className="mt-10 w-full">

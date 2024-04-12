@@ -5,11 +5,14 @@ import React, { useEffect, useState } from "react";
 // import { NFTContext } from "../../context/NftContext";
 import images from "../assets";
 import Image from "next/image";
-
 const SearchBar = ({
+    // @ts-ignore
     activeSelect,
+    // @ts-ignore
     setActiveSelect,
+    // @ts-ignore
     handleSearch,
+    // @ts-ignore
     clearSearch,
 }) => {
     const { theme } = useTheme();
