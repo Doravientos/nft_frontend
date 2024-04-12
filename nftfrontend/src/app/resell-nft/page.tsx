@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NFTContext } from "../../../context/NftContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
@@ -43,40 +43,38 @@ function Page() {
         );
     }
     return (
-        <Suspense>
-            <div className="flex justify-center p-12 sm:px-4">
-                <div className="w-3/5 md:w-full">
-                    <h1 className="font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white">
-                        Resell NFT
-                    </h1>
-                    <Input
-                        inputType="number"
-                        title="Price"
-                        placeHolder="NFT Price"
-                        // @ts-ignore
-                        handleClick={(e) => setPrice(e.target.value)}
-                    />
-                    {image && (
-                        <div className="relative size-52">
-                            <Image
-                                src={`https://gray-certain-bison-693.mypinata.cloud/ipfs/${image}`}
-                                className="mt-4 rounded"
-                                layout="fill"
-                                objectFit="cover"
-                                alt="NFT image"
-                            />
-                        </div>
-                    )}
-                    <div className="mt-7 flex w-full justify-end">
-                        <Button
-                            btnName="List NFT"
-                            classStyles="rounded-xl"
-                            handleClick={resell}
+        <div className="flex justify-center p-12 sm:px-4">
+            <div className="w-3/5 md:w-full">
+                <h1 className="font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white">
+                    Resell NFT
+                </h1>
+                <Input
+                    inputType="number"
+                    title="Price"
+                    placeHolder="NFT Price"
+                    // @ts-ignore
+                    handleClick={(e) => setPrice(e.target.value)}
+                />
+                {image && (
+                    <div className="relative size-52">
+                        <Image
+                            src={`https://gray-certain-bison-693.mypinata.cloud/ipfs/${image}`}
+                            className="mt-4 rounded"
+                            layout="fill"
+                            objectFit="cover"
+                            alt="NFT image"
                         />
                     </div>
+                )}
+                <div className="mt-7 flex w-full justify-end">
+                    <Button
+                        btnName="List NFT"
+                        classStyles="rounded-xl"
+                        handleClick={resell}
+                    />
                 </div>
             </div>
-        </Suspense>
+        </div>
     );
 }
 
