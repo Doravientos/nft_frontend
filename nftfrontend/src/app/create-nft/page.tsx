@@ -9,7 +9,7 @@ import { Button, Input, Loader } from "@/components";
 import images from "../../assets";
 import { NFTContext } from "../../../context/NftContext";
 
-function page() {
+function Page() {
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, setFormInput] = useState({
         price: "",
@@ -145,4 +145,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;
